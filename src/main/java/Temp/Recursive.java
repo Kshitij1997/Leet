@@ -5,6 +5,7 @@ public class Recursive {
 
         System.out.println(recursive_Factorial(5));
         System.out.println(recursive_Fibo(19));
+        System.out.println(getSubsets("abc"));
     }
 
     // fn = n * fn-1
@@ -32,6 +33,28 @@ public class Recursive {
             return 1;
         }
         return recursive_Fibo(n-1) + recursive_Fibo(n-2);
+    }
+
+    // return all the subsets for a string
+    // to get unique subsets pass hashset
+    public static ArrayList<String> getSubsets(String str){
+        String op = "";
+        ArrayList<String> subsets = new ArrayList<>();
+        getSubsetRecursive(str,op,subsets);
+        return  subsets;
+    }
+
+    private static void getSubsetRecursive(String ip, String op, ArrayList<String> subsets){
+        if(ip == ""){
+            subsets.add(op);
+            return;
+        }
+
+        String op_ = op + ip.substring(0,1);
+        ip = ip.length() == 1?"":ip.substring(1);
+
+        getSubsetRecursive(ip,op,subsets);
+        getSubsetRecursive(ip, op_, subsets);
     }
 }
 
