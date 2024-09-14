@@ -46,15 +46,23 @@ public class Recursive {
 
     private static void getSubsetRecursive(String ip, String op, ArrayList<String> subsets){
         if(ip == ""){
+
+            // when the i/p is empty string, add the o/p to subsets, which is final o/p
             subsets.add(op);
             return;
         }
 
-        String op_ = op + ip.substring(0,1);
+        // We have 2 choices
+        // to get either consider the first char, or to neglect it
+        String op1 = op;
+
+        // inserting the first char to the op
+        String op2 = op + ip.substring(0,1);
+
         ip = ip.length() == 1?"":ip.substring(1);
 
-        getSubsetRecursive(ip,op,subsets);
-        getSubsetRecursive(ip, op_, subsets);
+        getSubsetRecursive(ip,op1,subsets);
+        getSubsetRecursive(ip, op2, subsets);
     }
 }
 
