@@ -6,6 +6,7 @@ public class Recursive {
         System.out.println(recursive_Factorial(5));
         System.out.println(recursive_Fibo(19));
         System.out.println(getSubsets("abc"));
+        System.out.println(getSpacePermute("abc"));
     }
 
     // fn = n * fn-1
@@ -63,6 +64,35 @@ public class Recursive {
 
         getSubsetRecursive(ip,op1,subsets);
         getSubsetRecursive(ip, op2, subsets);
+    }
+
+    public static ArrayList<String> getSpacePermute(String str){
+
+        ArrayList<String> listOfStrings = new ArrayList<>();
+        String op = str.substring(0,1);
+
+        // remember to check condition of str length ==1
+        // if the length is one the remaining substring will be ""
+        String ip = str.length() == 1 ? "" : str.substring(1);
+        getSpacePermuteHelper(ip, op, listOfStrings);
+
+        return listOfStrings;
+    }
+
+    private static void getSpacePermuteHelper(String ip, String op, ArrayList<String> listOfStrings){
+
+        if(ip.length() == 0){
+            listOfStrings.add(op);
+            // make sure you add this return statement
+            return;
+        }
+
+        String op1 = op + ip.substring(0,1);
+        String op2 = op +" "+ ip.substring(0,1);
+        String ip_ = ip.length() == 1 ? "" : ip.substring(1);
+
+        getSpacePermuteHelper(ip_, op1, listOfStrings);
+        getSpacePermuteHelper(ip_, op2, listOfStrings);
     }
 }
 
